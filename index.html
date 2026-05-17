@@ -201,14 +201,36 @@ async function sendMsg() {
     liff.getContext().type !== 'none' &&
     liff.getContext().type !== 'external'
   ) {
-    await liff.sendMessages([
+    /*await liff.sendMessages([
       {
         type: 'text',
         text: JSON.stringify(liff.getContext()),//'This message TTTT',
       },
     ]);
-    liff.closeWindow();
+    liff.closeWindow();/**/
     //alert("Message sent")
+    //nnnn
+    let idTk = await liff.getIDToken();
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby1Qx4588NZ-Lo3AN3Ea5ihAzayUAG4aKo327UdR1u8o1UdJeG4s73Ur7-Kl70vcJyz/exec';
+    const data = { name: "John Doe", email: "john@example.com", idToken: idTk };
+
+    fetch(scriptURL, {
+      method: 'POST', // Use POST method
+      mode: 'no-cors', // Important for avoiding CORS errors with GAS redirecting
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data), // Convert data to JSON string
+    }).then(response => {
+      console.log('Success:', response);
+      alert("Message ok")
+    }).catch((error) => {
+      console.error('Error:', error);
+      alert("Message no")
+    });
+
+    //-------n
   }
 }
 
