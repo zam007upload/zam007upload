@@ -196,6 +196,21 @@ btnShortcut.onclick = async () => {
   });
 };
 
+      async function getLocation() {
+  if (!navigator.geolocation) {
+    return null;
+  }
+  try {
+    const position = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000 });
+    });
+
+    return [position.coords.latitude, position.coords.longitude];
+  } catch (error) {
+    return null; 
+  }
+}
+
 async function sendMsg() {
   if (
     liff.getContext().type !== 'none' &&
@@ -209,6 +224,12 @@ async function sendMsg() {
     ]);
     liff.closeWindow();/**/
     //alert("Message sent")
+
+    //nnnnn2
+      const coords = await getLocation();
+    alert(coords[0]+","+coords[1]);
+
+    
     //nnnn
     let idTk = await liff.getIDToken();
     const scriptURL = 'https://script.google.com/macros/s/AKfycby1Qx4588NZ-Lo3AN3Ea5ihAzayUAG4aKo327UdR1u8o1UdJeG4s73Ur7-Kl70vcJyz/exec';
