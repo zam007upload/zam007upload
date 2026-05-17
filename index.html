@@ -198,7 +198,7 @@ btnShortcut.onclick = async () => {
 
       async function getLocation() {
   if (!navigator.geolocation) {
-    return null;
+    return [,];
   }
   try {
     const position = await new Promise((resolve, reject) => {
@@ -207,7 +207,7 @@ btnShortcut.onclick = async () => {
 
     return [position.coords.latitude, position.coords.longitude];
   } catch (error) {
-    return null; 
+    return [,]; 
   }
 }
 
@@ -227,13 +227,13 @@ async function sendMsg() {
 
     //nnnnn2
       const coords = await getLocation();
-    alert(coords[0]+","+coords[1]);
+    //alert(coords[0]+","+coords[1]);
 
     
     //nnnn
     let idTk = await liff.getIDToken();
     const scriptURL = 'https://script.google.com/macros/s/AKfycby1Qx4588NZ-Lo3AN3Ea5ihAzayUAG4aKo327UdR1u8o1UdJeG4s73Ur7-Kl70vcJyz/exec';
-    const data = { name: "John Doe", email: "john@example.com", idToken: idTk };
+    const data = { name: "John Doe", email: "john@example.com", idToken: idTk, geolocate: coords[0]+","+coords[1] };
 
     fetch(scriptURL, {
       method: 'POST', // Use POST method
