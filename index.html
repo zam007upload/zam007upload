@@ -201,7 +201,7 @@ async function sendMsg() {
     await liff.sendMessages([
       {
         type: 'text',
-        text: liff.getContext(),//'This message TTTT',
+        text: JSON.stringify(liff.getContext()),//'This message TTTT',
       },
     ]);
     liff.closeWindow();
